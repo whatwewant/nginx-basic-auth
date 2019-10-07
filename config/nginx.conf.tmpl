@@ -31,7 +31,11 @@ http {
     server_name ##SERVER_NAME##;
 
     client_max_body_size ##CLIENT_MAX_BODY_SIZE##;
+
     proxy_read_timeout ##PROXY_READ_TIMEOUT##;
+
+    # avoid HTTP 411 Length Required
+    chunked_transfer_encoding on;
 
     location / {
       proxy_pass ##PROXY_PASS##;
