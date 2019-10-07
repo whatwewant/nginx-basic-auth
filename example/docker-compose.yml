@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.7'
 
 services:
   auth:
@@ -17,7 +17,7 @@ services:
       # WORKER_PROCESSES: auto
       BASIC_AUTH_USERNAME: zero
       BASIC_AUTH_PASSWORD: zero
-      PROXY_PASS_UPSTREAM: web:8080
+      PROXY_PASS: http://web:8080
 
   web:
     image: nginx:1.17.2-alpine
