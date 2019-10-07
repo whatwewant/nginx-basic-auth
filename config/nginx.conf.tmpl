@@ -50,6 +50,8 @@ http {
       
       # Do not pass Authorization header to destination
       proxy_set_header Authorization "";
+
+      add_header Guard-By whatwewant/nginx-basic-auth;
     }
   }
 
