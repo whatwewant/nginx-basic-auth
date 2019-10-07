@@ -33,8 +33,6 @@ http {
     client_max_body_size ##CLIENT_MAX_BODY_SIZE##;
     proxy_read_timeout ##PROXY_READ_TIMEOUT##;
 
-    include /etc/nginx/conf.d/*.conf;
-
     location / {
       proxy_pass ##PROXY_PASS##;
       auth_basic "Restricted";
@@ -45,12 +43,14 @@ http {
       proxy_set_header Connection	"upgrade";
       proxy_set_header X-Real-IP $remote_addr;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
       proxy_set_header Host $host;
       proxy_hide_header X-Powered-By;
       
       # Do not pass Authorization header to destination
       proxy_set_header Authorization "";
 
+      # Guard By
       add_header Guard-By whatwewant/nginx-basic-auth;
     }
   }
@@ -63,4 +63,6 @@ http {
       access_log off;
     }
   }
+
+  include /etc/nginx/conf.d/*.conf;
 }
