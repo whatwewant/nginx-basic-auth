@@ -29,7 +29,7 @@ http {
     include /etc/nginx/conf.d/*.conf;
 
     location / {
-      proxy_pass http://##PROXY_PASS_UPSTREAM##;
+      proxy_pass ##PROXY_PASS##;
       auth_basic "Restricted";
       auth_basic_user_file /etc/nginx/.htpasswd;
 

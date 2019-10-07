@@ -12,8 +12,8 @@ if [ -z $BASIC_AUTH_PASSWORD ]; then
   exit 1
 fi
 
-if [ -z $PROXY_PASS_UPSTREAM ]; then
-  echo >&2 "PROXY_PASS_UPSTREAM must be set"
+if [ -z $PROXY_PASS ]; then
+  echo >&2 "PROXY_PASS must be set"
   exit 1
 fi
 
@@ -25,7 +25,7 @@ sed \
   -e "s/##WORKER_PROCESSES##/$WORKER_PROCESSES/g" \
   -e "s/##SERVER_NAME##/$SERVER_NAME/g" \
   -e "s/##PORT##/$PORT/g" \
-  -e "s|##PROXY_PASS_UPSTREAM##|$PROXY_PASS_UPSTREAM|g" \
+  -e "s|##PROXY_PASS##|$PROXY_PASS|g" \
   nginx.conf.tmpl > /etc/nginx/nginx.conf
 
 exec nginx -g "daemon off;"
