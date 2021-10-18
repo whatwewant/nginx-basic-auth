@@ -56,7 +56,7 @@ jobs:
         with:
           # Custom Image: https://github.com/docker/metadata-action#inputs
           # images: whatwewant/zmicro,ghcr.io/whatwewant/zmicro
-          images: whatwewant/openresty-oauth2.0
+          images: whatwewant/nginx-basic-auth
           tags: |
             type=ref,event=branch
             type=semver,pattern=v{{version}}
