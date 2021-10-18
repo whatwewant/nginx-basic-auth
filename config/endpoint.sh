@@ -17,7 +17,12 @@ if [ -z $PROXY_PASS ]; then
   exit 1
 fi
 
-htpasswd -bBc /etc/nginx/.htpasswd $BASIC_AUTH_USERNAME $BASIC_AUTH_PASSWORD
+if [ ! -f "/etc/nginx/.htpasswd" ]; then
+  echo "Generate user: $BASIC_AUTH_USERNAME $BASIC_AUTH_PASSWORD"
+  htpasswd -bBc /etc/nginx/.htpasswd $BASIC_AUTH_USERNAME $BASIC_AUTH_PASSWORD
+else
+  echo "Found .htpasswd, use it instead of generating user"
+fi
 
 sed \
   -e "s/##CLIENT_MAX_BODY_SIZE##/$CLIENT_MAX_BODY_SIZE/g" \
